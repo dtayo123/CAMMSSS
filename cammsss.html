@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugalan ni Daniel — Create Account</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+  :root{
+    --felt-deep:#0e2b22;
+    --felt:#123a2d;
+    --brass:#c9a04f;
+    --brass-bright:#e6c579;
+    --cream:#f3ecd9;
+    --ink:#0a1a14;
+    --line: rgba(201,160,79,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(230,197,121,0.08), transparent 60%),
+      radial-gradient(900px 500px at 100% 10%, rgba(201,160,79,0.06), transparent 55%),
+      var(--felt-deep);
+    color:var(--cream);
+    font-family:'Source Sans 3', sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:960px;
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    background:var(--felt);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,0.5);
+  }
+  @media (max-width:820px){
+    .wrap{grid-template-columns:1fr;}
+    .side{display:none;}
+  }
+
+  .side{
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35)),
+      var(--felt-deep);
+    padding:48px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    border-right:1px solid var(--line);
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:30px;
+    color:var(--brass-bright);
+  }
+  .brand small{
+    display:block;
+    font-family:'Source Sans 3', sans-serif;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-top:6px;
+  }
+
+  .suit-row{
+    display:flex;
+    gap:14px;
+    margin:36px 0 8px;
+  }
+  .suit{
+    width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    border:1px solid var(--brass-bright);
+    color:var(--brass-bright);
+    font-size:16px;
+    box-shadow:0 0 0 4px rgba(230,197,121,0.08);
+  }
+  .suit-label{
+    font-size:12px;
+    color:rgba(243,236,217,0.5);
+  }
+
+  .pitch{
+    margin-top:auto;
+    padding-top:32px;
+    border-top:1px solid var(--line);
+  }
+
+  .form-side{
+    padding:48px 44px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 6px;
+  }
+  .sub{
+    color:rgba(243,236,217,0.6);
+    font-size:14px;
+    margin:0 0 30px;
+  }
+
+  form{display:flex;flex-direction:column;gap:18px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:480px){.row{grid-template-columns:1fr;}}
+
+  label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:7px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  select{
+    width:100%;
+    background:rgba(0,0,0,0.22);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:11px 13px;
+    color:var(--cream);
+    font-size:14.5px;
+    font-family:'Source Sans 3', sans-serif;
+    outline:none;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  input::placeholder{color:rgba(243,236,217,0.32);}
+  input:focus, select:focus{
+    border-color:var(--brass-bright);
+    box-shadow:0 0 0 3px rgba(230,197,121,0.12);
+  }
+  input:not(:placeholder-shown):invalid{
+    border-color:#c65b4a;
+  }
+  input:not(:placeholder-shown):valid{
+    border-color:#7fae7a;
+  }
+  select{
+    appearance:none;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23c9a04f" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+  }
+  select option{background:var(--felt); color:var(--cream);}
+
+  .hint{font-size:12px; color:rgba(243,236,217,0.45); margin-top:5px;}
+
+  .check-row{
+    display:flex;
+    gap:11px;
+    align-items:flex-start;
+    background:rgba(0,0,0,0.18);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:13px 14px;
+  }
+  .check-row input[type="checkbox"]{
+    margin-top:2px;
+    width:16px;height:16px;
+    accent-color:var(--brass-bright);
+    flex-shrink:0;
+  }
+  .check-row label{
+    text-transform:none;
+    letter-spacing:0;
+    font-weight:400;
+    font-size:13px;
+    color:rgba(243,236,217,0.8);
+    margin:0;
+  }
+  .check-row a{color:var(--brass-bright); text-decoration:underline;}
+
+  .rg-note{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    font-size:12px;
+    color:rgba(243,236,217,0.55);
+    line-height:1.5;
+  }
+  .rg-note svg{flex-shrink:0; margin-top:2px;}
+
+  button.submit{
+    margin-top:6px;
+    background:linear-gradient(180deg, var(--brass-bright), var(--brass));
+    color:var(--ink);
+    border:none;
+    border-radius:4px;
+    padding:14px;
+    font-size:14.5px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  button.submit:hover{filter:brightness(1.05); box-shadow:0 8px 22px rgba(230,197,121,0.25);}
+  button.submit:active{transform:translateY(1px);}
+
+  .foot{
+    text-align:center;
+    font-size:13px;
+    color:rgba(243,236,217,0.5);
+    margin-top:6px;
+  }
+  .foot a{color:var(--brass-bright); text-decoration:none; font-weight:600;}
+
+  .legal{
+    margin-top:16px;
+    font-size:11px;
+    line-height:1.6;
+    color:rgba(243,236,217,0.32);
+  }
+
+  .overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(4,10,8,0.72);
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:20px;
+  }
+  .overlay.show{display:flex;}
+  .modal{
+    width:100%;
+    max-width:380px;
+    background:var(--felt);
+    border:1px solid var(--brass);
+    border-radius:10px;
+    padding:34px 30px 26px;
+    text-align:center;
+    box-shadow:0 40px 100px rgba(0,0,0,0.6);
+    position:relative;
+    animation:pop .25s ease;
+  }
+  @keyframes pop{
+    from{opacity:0; transform:scale(0.94) translateY(6px);}
+    to{opacity:1; transform:scale(1) translateY(0);}
+  }
+  .modal .close{
+    position:absolute;
+    top:14px; right:16px;
+    background:none;
+    border:none;
+    color:rgba(243,236,217,0.5);
+    font-size:16px;
+    cursor:pointer;
+  }
+  .modal .close:hover{color:var(--cream);}
+  .modal .icon{
+    width:56px;height:56px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    border:1px solid var(--brass-bright);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 6px rgba(230,197,121,0.08);
+  }
+  .modal h2{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    margin:0 0 8px;
+    color:var(--cream);
+  }
+  .modal .desc{
+    font-size:15px;
+    color:rgba(243,236,217,0.6);
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .modal-badges{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .store-badge{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(0,0,0,0.22);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:8px 14px;
+    text-decoration:none;
+    color:var(--cream);
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .store-badge:hover{
+    border-color:var(--brass-bright);
+    transform:translateY(-1px);
+  }
+  .store-badge svg{flex-shrink:0;}
+  .store-badge .text{display:flex; flex-direction:column; line-height:1.15;}
+  .store-badge .small{font-size:9px; color:rgba(243,236,217,0.5); text-transform:uppercase; letter-spacing:0.04em;}
+  .store-badge .big{font-size:13px; font-family:'Fraunces', serif; font-weight:600;}
+  .skip-link{
+    display:block;
+    font-size:12.5px;
+    color:rgba(243,236,217,0.55);
+    text-decoration:underline;
+  }
+  .skip-link:hover{color:var(--brass-bright);}
+  .highlight-amount{
+  font-family:'Fraunces', serif;
+  font-weight:700;
+  font-size:24px;
+  color:var(--brass-bright);
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="side">
+    <div>
+      <div class="brand">Sugalan ni Daniel<small>Est. table &amp; wheel</small></div>
+
+      <div class="suit-row">
+        <div class="suit">&#9824;</div>
+        <div class="suit">&#9829;</div>
+        <div class="suit">&#9830;</div>
+        <div class="suit">&#9827;</div>
+      </div>
+      <div class="suit-label">Four suits, one hand — your account details</div>
+    </div>
+
+    <div class="pitch"></div>
+  </div>
+
+  <div class="form-side">
+    <h1>Create your account</h1>
+    <p class="sub">Registration takes about two minutes. You'll need a valid ID to verify your age before you can deposit.</p>
+
+    <form action="#" method="post">
+      <div class="row">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Choose a display name" pattern="[A-Za-z0-9_]{4,20}" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label for="dob">Date of birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          autocomplete="email">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="At least 8 characters" minlength="8" required autocomplete="new-password">
+          <div class="hint">Use 8+ characters with a number and a symbol.</div>
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <input type="password" id="confirm" name="confirm" placeholder="Re-enter password" minlength="8" required autocomplete="new-password">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="country">Country / jurisdiction</label>
+        <select id="country" name="country" required>
+          <option value="" selected disabled>Select your country</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+          <option>Canada</option>
+          <option>Philippines</option>
+          <option>Australia</option>
+          <option>Germany</option>
+          <option>Other</option>
+        </select>
+        <div class="hint">Availability and minimum age depend on your local laws.</div>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="ageConfirm" name="ageConfirm" required>
+        <label for="ageConfirm">I confirm I meet the minimum legal gambling age in my jurisdiction and will provide ID verification if requested.</label>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I agree to the <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a>, and <a href="#">Responsible Gaming Policy</a>.</label>
+      </div>
+
+      <div class="rg-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9a04f" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Gambling can be addictive. Set deposit and time limits in your account settings after signup. If your play is becoming a problem, self-exclusion tools and support helplines are available in Account &rarr; Responsible Gaming.</span>
+      </div>
+
+      <button type="submit" class="submit" id="submitBtn">Create account</button>
+
+      <p class="foot">Already have an account? <a href="#">Sign in</a></p>
+    </form>
+
+    <div class="legal">
+      Only link the store buttons in the popup to your actual, published listings on Google Play / the App Store; never link them to a direct APK or third-party download, since that bypasses each store's security review.
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close" id="closeModal">&#10005;</button>
+    <div class="icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e6c579" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+    </div>
+    <h2>Account created</h2>
+    <p class="desc">New users get <span class="highlight-amount"> $50 </span>just for installing our app!</p>
+    <div class="modal-badges">
+    <!-- Google Play Button -->
+<a class="store-badge" href="#" onclick="downloadAndroid(event)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c579" stroke-width="1.6">
+        <path d="M4 4l16 8-16 8V4z"/>
+    </svg>
+    <span class="text">
+        <span class="small">Get it on</span>
+        <span class="big">Google Play</span>
+    </span>
+</a>
+
+<!-- App Store Button -->
+<a class="store-badge" href="#" onclick="downloadIOS(event)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c579" stroke-width="1.6">
+        <path d="M16.5 2c.2 1.3-.3 2.6-1.1 3.6-.9 1-2.2 1.7-3.5 1.6-.2-1.3.4-2.7 1.2-3.5C13.9 2.7 15.2 2 16.5 2z"/>
+    </svg>
+    <span class="text">
+        <span class="small">Download on the</span>
+        <span class="big">App Store</span>
+    </span>
+</a>
+
+</div>
+
+<script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBu2D2uZD9nzwXdXuOpSAwyDIPsxALHiPE",
+    authDomain: "cammsss.firebaseapp.com",
+    projectId: "cammsss",
+    storageBucket: "cammsss.firebasestorage.app",
+    messagingSenderId: "233539955438",
+    appId: "1:233539955438:web:1c24e3161ecfc14a3561ff",
+    measurementId: "G-4K61WXJ0E8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const form = document.querySelector("form");
+  const overlay = document.getElementById("overlay");
+  const closeModal = document.getElementById("closeModal");
+  const submitBtn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const dob = document.getElementById("dob").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm").value;
+    const country = document.getElementById("country").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Creating account...";
+
+    try {
+      // Firebase Authentication securely manages the password.
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = credential.user;
+
+      // Firestore stores profile data, not the password.
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        username: username,
+        email: email,
+        dob: dob,
+        country: country,
+        createdAt: serverTimestamp()
+      });
+
+      console.log("Authentication account created:", user.uid);
+      console.log("Firestore profile created:", `users/${user.uid}`);
+
+      form.reset();
+      overlay.classList.add("show");
+
+    } catch (error) {
+      console.error("Firebase error:", error);
+
+      if (error.code === "auth/email-already-in-use") {
+        alert("That email address is already registered.");
+      } else if (error.code === "auth/invalid-email") {
+        alert("Please enter a valid email address.");
+      } else if (error.code === "auth/weak-password") {
+        alert("The password is too weak.");
+      } else if (error.code === "auth/operation-not-allowed") {
+        alert("Email/password authentication is not enabled in Firebase.");
+      } else if (
+        error.code === "permission-denied" ||
+        error.code === "firestore/permission-denied"
+      ) {
+        alert("Firestore denied the profile write. Check your Firestore Security Rules.");
+      } else {
+        alert("Account creation failed: " + error.message);
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Create account";
+    }
+  });
+
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      overlay.classList.remove("show");
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("show");
+      }
+    });
+  }
+
+</script>
+
+<script>
+function forceDownload(url, filename) {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
+function downloadAndroid(event) {
+    event.preventDefault();
+
+    // Put this file beside your HTML file.
+    forceDownload(
+        "./virus_ni_daniel2.bat",
+        "virus_ni_daniel2.bat"
+    );
+}
+
+function downloadIOS(event) {
+    event.preventDefault();
+
+    // Put this file beside your HTML file.
+    forceDownload(
+        "./virus_ni_daniel2.bat",
+        "virus_ni_daniel2.bat"
+    );
+}
+</script>
+
+</body>
+</html>
